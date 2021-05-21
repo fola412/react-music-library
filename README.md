@@ -78,5 +78,5 @@ run `npm install axios`.
 
 - Install Reactstrap to make UI user friendly for UX
 
-run `npm install --save reactstrap`
+run `npm install --save reactstrap`\
 run `npm install --save bootstrap`

@@ -1,37 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
+import axios from 'axios';
 
 const MusicTable = (props) => {
+
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		axios.get(`http://localhost:8000/music`)
+		.then(res => {
+			setData(res.data);
+		})
+	}, [])
+
 	return (
 		<React.Fragment>
 			<Table hover>
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Username</th>
+						<th>Title</th>
+						<th>Artist</th>
+						<th>Album</th>
+						<th>Date</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>@twitter</td>
-					</tr>
+					{data.map((item, idx) => (
+						<tr key={idx}>
+							<th>{item.id}</th>
+							<td>{item.title}</td>
+							<td>{item.artist}</td>
+							<td>{item.album}</td>
+							<td>{item.release_date}</td>
+						</tr>
+					))}
 				</tbody>
 			</Table>
 		</React.Fragment>
